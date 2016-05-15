@@ -31,7 +31,7 @@ cat file | sed /^\*$/d | sed s/\!// \
   | while read -r file; do cp $file ./dotfiles/; done
 ```
 
-<img width="213" height="211" src="wtf.jpg">
+<a href="https://github.com/fritx/jayin"><img width="213" height="211" src="wtf.jpg"></a>
 
 WTF?
 
