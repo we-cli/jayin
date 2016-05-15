@@ -1,0 +1,22 @@
+{
+  "name": "jayin",
+  "version": "0.0.0",
+  "description": "Piping with js at terminal",
+  "repository": "fritx/jayin",
+  "keywords": [
+    "bash",
+    "cli",
+    "cmd",
+    "jayin",
+    "json",
+    "pipe",
+    "shell",
+    "stream"
+  ],
+  "bin": {
+    "jayin": "index.js"
+  },
+  "dependencies": {
+    "through2": "^2.0.1"
+  }
+}
