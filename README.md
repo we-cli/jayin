@@ -2,7 +2,7 @@
 
 <img width="90" height="20" src="https://fritx.github.io/51voa-cli/img/prs-welcome.svg">&nbsp;&nbsp;<a href="https://circleci.com/gh/fritx/jayin/tree/dev"><img width="73" height="20" src="https://circleci.com/gh/fritx/jayin/tree/dev.svg?style=svg"></a>
 
-Let's say you have a gitignore-like file:
+假如你有一个类似于gitignore的文件:
 
 ```plain
 # https://github.com/fritx/dotfiles
@@ -18,9 +18,9 @@ Let's say you have a gitignore-like file:
 !.editorconfig
 ```
 
-You want to cp the listed files to another folder.
+你想要cp这些文件到另外一个文件夹。
 
-Do it in bash?
+用bash来搞？
 
 ```shell
 files=$(cat .gitignore | sed /^\*$/d | sed s/\!//)
@@ -33,9 +33,9 @@ cat file | sed /^\*$/d | sed s/\!// \
 
 <a href="https://github.com/fritx/jayin"><img width="213" height="211" src="wtf.jpg"></a>
 
-WTF?
+瓦特？
 
-As a node.js developer, what if using just js flow/style?
+作为一名node.js工程师，为什么不能用js流来处理呢？
 
 ```shell
 cat .gitignore | js -ti 'x.trim().split(`\n`).slice(1).map(x => x.slice(1))' \
@@ -48,21 +48,21 @@ cat .gitignore | js -ti 'x.trim().split(`\n`)' \
   | js -e 'exec(`cp ${x} ./dotfiles/`)'
 ```
 
-Don't forget to take an alias if you want.
+不要忘了搞一个alias，如果你需要的话。
 
 ```shell
 npm install -g jayin
 alias js="jayin"
 ```
 
-- `-ti`: input as text, no more JSON.parse
-- `-to`: output as text, no more JSON.stringify
-- `-t`: input/output both as text
-- `-e`: for each, in chain
-- `x`: current input value
+- `-ti`: 以文本的形式直接input，无需JSON.parse
+- `-to`: 以文本的形式直接output，无需JSON.stringify
+- `-t`: 以上两者
+- `-e`: for each
+- `x`: 当前的input内容
 - `i`: current index value (with -e)
 - `exec(cmd)`: child_process.execSync(cmd)
 
-jayin is based on [through2](https://github.com/rvagg/through2).
+jayin基于[through2](https://github.com/rvagg/through2).
 
-If you've seen anything that is similar to this, don't hesitate to let me know ;)
+如果你发现已经早已有类似的东西存在，不妨告诉我一下 ;)
