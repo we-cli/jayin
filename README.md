@@ -55,13 +55,13 @@ npm install -g jayin
 alias js="jayin"
 ```
 
+- `-ti`: input as text, no more JSON.parse
+- `-to`: output as text, no more JSON.stringify
+- `-t`: input/output both as text
+- `-e`: for each, in chain
 - `x`: current input value
 - `i`: current index value (with -e)
 - `exec(cmd)`: child_process.execSync(cmd)
-- `-e`: for each
-- `-ti`: input as text
-- `-to`: output as text
-- `-t`: input/output both as text
 
 jayin is based on [through2](https://github.com/rvagg/through2).
 
