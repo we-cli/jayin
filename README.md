@@ -56,6 +56,7 @@ alias js="jayin"
 ```
 
 - `x`: current input value
+- `i`: current index value (with -e)
 - `exec(cmd)`: child_process.execSync(cmd)
 - `-e`: for each
 - `-ti`: input as text

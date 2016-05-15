@@ -3,6 +3,7 @@
 // writen in es5, for better env compatability
 
 // todo: maybe JacksonTian/bufferhelper?
+// todo: minimist for friendly cli handling?
 // vm: https://nodejs.org/api/vm.html
 var through2 = require('through2')
 var cp = require('child_process')
@@ -31,7 +32,7 @@ args.forEach(function (arg) {
 })
 
 if (forEach) {
-  expr = 'x.forEach(function (x) {' + expr + '})'
+  expr = 'x.forEach(function (x, i) {' + expr + '}), x'
 }
 
 stdin.pipe(through2(function (chunk, enc, callback) {
