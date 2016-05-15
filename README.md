@@ -40,6 +40,12 @@ As a node.js developer, what if using just js flow/style?
 ```shell
 cat .gitignore | js -ti 'x.trim().split(`\n`).slice(1).map(x => x.slice(1))' \
   | js -e 'exec(`cp ${x} ./dotfiles/`)'
+
+# same as
+cat .gitignore | js -ti 'x.trim().split(`\n`)' \
+  | js 'x.slice(1)' \
+  | js 'x.map(x => x.slice(1))' \
+  | js -e 'exec(`cp ${x} ./dotfiles/`)'
 ```
 
 Don't forget to take an alias if you want.
