@@ -31,7 +31,7 @@ cat file | sed /^\*$/d | sed s/\!// \
   | while read -r file; do cp $file ./dotfiles/; done
 ```
 
-<img width="213" height="220" src="wtf.jpg">
+<img width="213" height="211" src="wtf.jpg">
 
 WTF?
 
