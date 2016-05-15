@@ -16,6 +16,13 @@
   "bin": {
     "jayin": "index.js"
   },
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "bufferhelper": "^0.2.1",
+    "mocha": "^2.4.5"
+  },
   "dependencies": {
     "through2": "^2.0.1"
   }
