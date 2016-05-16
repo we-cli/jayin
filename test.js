@@ -1,4 +1,4 @@
-/* global describe, it */
+/* global describe, it, after */
 const BufferHelper = require('bufferhelper')
 const assert = require('assert')
 const chmodSync = require('child_process').chmodSync
@@ -38,12 +38,25 @@ describe('jayin', () => {
     js.stdin.end('[1,2,3,4,5]')
   })
 
-  it ('i: x, -e, exec', (done) => {
+  it('_, _.filter, _.reverse', (done) => {
+    const helper = new BufferHelper()
+    const js = spawn('./index.js', ['_(x).filter(x => x % 2).reverse().value()'])
+    js.stdout.once('end', () => {
+      assert.equal(helper.toString(), '[3,1]')
+      done()
+    })
+    js.stdout.on('data', (chunk) => {
+      helper.concat(chunk)
+    })
+    js.stdin.end('[1,2,3,4]')
+  })
+
+  it ('i: x, -e, -c', (done) => {
     // https://www.shell-tips.com/2010/06/14/performing-math-calculation-in-bash/
     // const env = { count: 0 }
     // execSync('count=0')
     const helper = new BufferHelper()
-    const js = spawn('./index.js', ['-e', 'exec(`echo "${i}: ${x}" >> tmp`)'])
+    const js = spawn('./index.js', ['-e', '-c', 'echo "${i}: ${x}" >> tmp'])
     js.stdout.once('end', () => {
       // assert.equal(execSync('echo $count').toString(), '15')
       // assert.equal(env.count, '15')

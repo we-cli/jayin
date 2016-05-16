@@ -6,6 +6,7 @@
 // todo: minimist for friendly cli handling?
 // vm: https://nodejs.org/api/vm.html
 var through2 = require('through2')
+var _ = require('lodash')
 var cp = require('child_process')
 var vm = require('vm')
 var stdin = process.stdin
@@ -13,6 +14,7 @@ var stdout = process.stdout
 
 var args = process.argv.slice(2)
 var forEach = false
+var execCmd = false
 var textIn = false
 var textOut = false
 var expr
@@ -20,6 +22,8 @@ var expr
 args.forEach(function (arg) {
   if (arg === '-e') { // for each
     forEach = true
+  } else if (arg === '-c') { // exec cmd
+    execCmd = true
   } else if (arg === '-ti') { // text input
     textIn = true
   } else if (arg === '-to') { // text output
@@ -31,6 +35,9 @@ args.forEach(function (arg) {
   }
 })
 
+if (execCmd) {
+  expr = 'exec(`' + expr + '`)'
+}
 if (forEach) {
   expr = 'x.forEach(function (x, i) {' + expr + '}), x'
 }
@@ -41,6 +48,7 @@ stdin.pipe(through2(function (chunk, enc, callback) {
   var inobj = textIn ? injson : JSON.parse(injson)
   var sandbox = {
     exec: cp.execSync,
+    _: _,
     x: inobj
   }
   vm.createContext(sandbox)
