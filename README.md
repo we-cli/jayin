@@ -29,6 +29,9 @@ for file in $files; do cp $file ./dotfiles/; done
 # or even
 cat file | sed /^\*$/d | sed s/\!// \
   | while read -r file; do cp $file ./dotfiles/; done
+
+# thanks to @congeec, http://v2ex.com/t/278831#reply3
+sed /^\*$/d .gitignore | sed s/\!// | xargs -I{} cp {} ./dotfiles/
 ```
 
 <a href="https://github.com/fritx/jayin"><img width="213" height="211" src="wtf.jpg"></a>
@@ -45,7 +48,7 @@ cat .gitignore | js -ti 'x.trim().split(`\n`).slice(1).map(x => x.slice(1))' \
 cat .gitignore | js -ti 'x.trim().split(`\n`)' \
   | js 'x.slice(1)' \
   | js 'x.map(x => x.slice(1))' \
-  | js -e 'exec(`cp ${x} ./dotfiles/`)'
+  | js -e -c 'cp ${x} ./dotfiles/'
 ```
 
 Don't forget to take an alias if you want.
@@ -59,6 +62,7 @@ alias js="jayin"
 - `-to`: output as text, no more JSON.stringify
 - `-t`: input/output both as text
 - `-e`: for each, in chain
+- `-c`: shortcut of exec(cmd)
 - `x`: current input value
 - `i`: current index value (with -e)
 - `exec(cmd)`: child_process.execSync(cmd)

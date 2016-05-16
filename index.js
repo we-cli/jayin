@@ -13,6 +13,7 @@ var stdout = process.stdout
 
 var args = process.argv.slice(2)
 var forEach = false
+var execCmd = false
 var textIn = false
 var textOut = false
 var expr
@@ -20,6 +21,8 @@ var expr
 args.forEach(function (arg) {
   if (arg === '-e') { // for each
     forEach = true
+  } else if (arg === '-c') { // exec cmd
+    execCmd = true
   } else if (arg === '-ti') { // text input
     textIn = true
   } else if (arg === '-to') { // text output
@@ -31,6 +34,9 @@ args.forEach(function (arg) {
   }
 })
 
+if (execCmd) {
+  expr = 'exec(`' + expr + '`)'
+}
 if (forEach) {
   expr = 'x.forEach(function (x, i) {' + expr + '}), x'
 }
