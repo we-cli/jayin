@@ -6,6 +6,7 @@
 // todo: minimist for friendly cli handling?
 // vm: https://nodejs.org/api/vm.html
 var through2 = require('through2')
+var _ = require('lodash')
 var cp = require('child_process')
 var vm = require('vm')
 var stdin = process.stdin
@@ -47,6 +48,7 @@ stdin.pipe(through2(function (chunk, enc, callback) {
   var inobj = textIn ? injson : JSON.parse(injson)
   var sandbox = {
     exec: cp.execSync,
+    _: _,
     x: inobj
   }
   vm.createContext(sandbox)

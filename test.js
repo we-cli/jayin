@@ -38,6 +38,19 @@ describe('jayin', () => {
     js.stdin.end('[1,2,3,4,5]')
   })
 
+  it('_, _.filter, _.reverse', (done) => {
+    const helper = new BufferHelper()
+    const js = spawn('./index.js', ['_(x).filter(x => x % 2).reverse().value()'])
+    js.stdout.once('end', () => {
+      assert.equal(helper.toString(), '[3,1]')
+      done()
+    })
+    js.stdout.on('data', (chunk) => {
+      helper.concat(chunk)
+    })
+    js.stdin.end('[1,2,3,4]')
+  })
+
   it ('i: x, -e, -c', (done) => {
     // https://www.shell-tips.com/2010/06/14/performing-math-calculation-in-bash/
     // const env = { count: 0 }

@@ -51,6 +51,19 @@ cat .gitignore | js -ti 'x.trim().split(`\n`)' \
   | js -e -c 'cp ${x} ./dotfiles/'
 ```
 
+```shell
+# lodash is also integrated in
+# https://github.com/lodash/lodash
+echo '[1,2,3,4]' | js '_.filter(x, x => x %2)'  \
+  | js '_.reverse(x)'  \
+  >> file
+
+# or in chain
+echo '[1,2,3,4]'  \
+  | js '_(x).filter(x => x %2).reverse().value()'  \
+  >> file
+```
+
 Don't forget to take an alias if you want.
 
 ```shell
