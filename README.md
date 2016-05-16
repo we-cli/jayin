@@ -1,6 +1,6 @@
 # jayin
 
-<img width="90" height="20" src="https://fritx.github.io/51voa-cli/img/prs-welcome.svg">&nbsp;&nbsp;<a href="https://circleci.com/gh/fritx/jayin/tree/dev"><img width="73" height="20" src="https://circleci.com/gh/fritx/jayin/tree/dev.svg?style=svg"></a>
+<a href="https://github.com/fritx/jayin"><img width="90" height="20" src="https://fritx.github.io/51voa-cli/img/prs-welcome.svg"></a>&nbsp;&nbsp;<a href="https://circleci.com/gh/fritx/jayin/tree/dev"><img width="73" height="20" src="https://circleci.com/gh/fritx/jayin/tree/dev.svg?style=svg"></a>
 
 Let's say you have a gitignore-like file:
 
