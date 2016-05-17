@@ -17,7 +17,7 @@ var forEach = false
 var execCmd = false
 var textIn = false
 var textOut = false
-var expr
+var exprs = []
 
 args.forEach(function (arg) {
   if (arg === '-e') { // for each
@@ -30,30 +30,36 @@ args.forEach(function (arg) {
     textOut = true
   } else if (arg === '-t') { // text i/o
     textIn = textOut = true
-  } else if (!expr) {
-    expr = arg
+  } else {
+    exprs.push(arg)
   }
 })
 
-if (execCmd) {
-  expr = 'exec(`' + expr + '`)'
-}
-if (forEach) {
-  expr = 'x.forEach(function (x, i) {' + expr + '}), x'
-}
+var stream = stdin
 
-stdin.pipe(through2(function (chunk, enc, callback) {
-  var injson = chunk.toString()
-
-  var inobj = textIn ? injson : JSON.parse(injson)
-  var sandbox = {
-    exec: cp.execSync,
-    _: _,
-    x: inobj
+exprs.forEach(function (expr) {
+  if (execCmd) {
+    expr = 'exec(`' + expr + '`)'
   }
-  vm.createContext(sandbox)
-  var outobj = vm.runInContext(expr, sandbox)
+  if (forEach) {
+    expr = 'x.forEach(function (x, i) {' + expr + '}), x'
+  }
 
-  var outjson = textOut ? outobj : JSON.stringify(outobj)
-  this.push(outjson)
-})).pipe(stdout)
+  stream = stream.pipe(through2(function (chunk, enc, callback) {
+    var injson = chunk.toString()
+
+    var inobj = textIn ? injson : JSON.parse(injson)
+    var sandbox = {
+      exec: cp.execSync,
+      _: _,
+      x: inobj
+    }
+    vm.createContext(sandbox)
+    var outobj = vm.runInContext(expr, sandbox)
+
+    var outjson = textOut ? outobj : JSON.stringify(outobj)
+    this.push(outjson)
+  }))
+})
+
+stream.pipe(stdout)

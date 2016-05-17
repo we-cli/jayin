@@ -38,6 +38,32 @@ describe('jayin', () => {
     js.stdin.end('[1,2,3,4,5]')
   })
 
+  it('exprs', (done) => {
+    const helper = new BufferHelper()
+    const js = spawn('node', ['./index.js', 'x.filter(x => x % 2)', 'x.reverse()'])
+    js.stdout.once('end', () => {
+      assert.equal(helper.toString(), '[3,1]')
+      done()
+    })
+    js.stdout.on('data', (chunk) => {
+      helper.concat(chunk)
+    })
+    js.stdin.end('[1,2,3,4]')
+  })
+
+  it('no expr', (done) => {
+    const helper = new BufferHelper()
+    const js = spawn('node', ['./index.js'])
+    js.stdout.once('end', () => {
+      assert.equal(helper.toString(), '[1,2,3,4]')
+      done()
+    })
+    js.stdout.on('data', (chunk) => {
+      helper.concat(chunk)
+    })
+    js.stdin.end('[1,2,3,4]')
+  })
+
   it('_, _.filter, _.reverse', (done) => {
     const helper = new BufferHelper()
     const js = spawn('node', ['./index.js', '_(x).filter(x => x % 2).reverse().value()'])
