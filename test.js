@@ -8,13 +8,13 @@ const fs = require('fs')
 
 // todo: more test cases
 
-execSync('chmod +x ./index.js')
+// execSync('chmod +x ./index.js')
 // execSync('alias js="./index.js"') // not work with spawn
 
 describe('jayin', () => {
   it ('x', (done) => {
     const helper = new BufferHelper()
-    const js = spawn('./index.js', ['x.slice(2, 4)'])
+    const js = spawn('node', ['./index.js', 'x.slice(2, 4)'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '[3,4]')
       done()
@@ -27,7 +27,7 @@ describe('jayin', () => {
 
   it('-t', (done) => {
     const helper = new BufferHelper()
-    const js = spawn('./index.js', ['-t', 'x.slice(1, -1).replace(/,/g, `\n`)'])
+    const js = spawn('node', ['./index.js', '-t', 'x.slice(1, -1).replace(/,/g, `\n`)'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '1\n2\n3\n4\n5')
       done()
@@ -40,7 +40,7 @@ describe('jayin', () => {
 
   it('_, _.filter, _.reverse', (done) => {
     const helper = new BufferHelper()
-    const js = spawn('./index.js', ['_(x).filter(x => x % 2).reverse().value()'])
+    const js = spawn('node', ['./index.js', '_(x).filter(x => x % 2).reverse().value()'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '[3,1]')
       done()
@@ -56,7 +56,7 @@ describe('jayin', () => {
     // const env = { count: 0 }
     // execSync('count=0')
     const helper = new BufferHelper()
-    const js = spawn('./index.js', ['-e', '-c', 'echo "${i}: ${x}" >> tmp'])
+    const js = spawn('node', ['./index.js', '-e', '-c', 'echo "${i}: ${x}" >> tmp'])
     js.stdout.once('end', () => {
       // assert.equal(execSync('echo $count').toString(), '15')
       // assert.equal(env.count, '15')
