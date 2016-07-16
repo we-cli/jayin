@@ -5,6 +5,7 @@
 // todo: maybe JacksonTian/bufferhelper?
 // todo: minimist for friendly cli handling?
 // vm: https://nodejs.org/api/vm.html
+'use strict'
 var through2 = require('through2')
 var _ = require('lodash')
 var cp = require('child_process')

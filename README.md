@@ -54,14 +54,14 @@ cat .gitignore | js -ti 'x.trim().split(`\n`)' \
 ```shell
 # lodash is also integrated in
 # https://github.com/lodash/lodash
-echo '[1,2,3,4]' | js '_.filter(x, x => x %2)'  \
+echo '[1,2,3,4]' | js '_.filter(x, x => x % 2)'  \
   | js '_.reverse(x)'  \
-  >> file
+  > file
 
 # or in chain
 echo '[1,2,3,4]'  \
-  | js '_(x).filter(x => x %2).reverse().value()'  \
-  >> file
+  | js '_(x).filter(x => x % 2).reverse().value()'  \
+  > file
 ```
 
 Don't forget to take an alias if you want.
@@ -78,6 +78,7 @@ alias js="jayin"
 - `-c`: shortcut of exec(cmd)
 - `x`: current input value
 - `i`: current index value (with -e)
+- `_`: lodash
 - `exec(cmd)`: child_process.execSync(cmd)
 
 jayin is based on [through2](https://github.com/rvagg/through2).
