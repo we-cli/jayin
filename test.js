@@ -34,6 +34,32 @@ describe('jayin', () => {
     js.stdin.end('[1,2,3,4,5]')
   })
 
+  it('-ti', (done) => {
+    const helper = new BufferHelper()
+    const js = cp.spawn('node', ['./index.js', '-ti', 'a=JSON.parse(x), a.push(999), a'])
+    js.stdout.once('end', () => {
+      assert.equal(helper.toString(), '[1,2,3,4,5,999]')
+      done()
+    })
+    js.stdout.on('data', (chunk) => {
+      helper.concat(chunk)
+    })
+    js.stdin.end('[1,2,3,4,5]')
+  })
+
+  it('-to', (done) => {
+    const helper = new BufferHelper()
+    const js = cp.spawn('node', ['./index.js', '-to', 'x.join(`\n`)'])
+    js.stdout.once('end', () => {
+      assert.equal(helper.toString(), '1\n2\n3\n4\n5')
+      done()
+    })
+    js.stdout.on('data', (chunk) => {
+      helper.concat(chunk)
+    })
+    js.stdin.end('[1,2,3,4,5]')
+  })
+
   it('exprs', (done) => {
     const helper = new BufferHelper()
     const js = cp.spawn('node', ['./index.js', 'x.filter(x => x % 2)', 'x.reverse()'])

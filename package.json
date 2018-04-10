@@ -17,11 +17,12 @@
     "jayin": "index.js"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha"
   },
   "devDependencies": {
     "bufferhelper": "^0.2.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "nyc": "^11.6.0"
   },
   "dependencies": {
     "lodash": "^4.12.0",
