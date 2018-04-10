@@ -84,3 +84,9 @@ alias js="jayin"
 jayin is based on [through2](https://github.com/rvagg/through2).
 
 If you've seen anything that is similar to this, don't hesitate to let me know ;)
+
+# License
+
+[MIT](https://github.com/fritx/jayin/blob/dev/LICENSE) License
+
+Copyright (c) 2016-Present [Fritz Lin](https://github.com/fritx)
