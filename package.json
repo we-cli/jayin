@@ -23,7 +23,8 @@
   "devDependencies": {
     "bufferhelper": "^0.2.1",
     "mocha": "^2.4.5",
-    "nyc": "^11.6.0"
+    "nyc": "^11.6.0",
+    "which": "^2.0.2"
   },
   "dependencies": {
     "lodash": "^4.12.0",

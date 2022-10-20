@@ -5,12 +5,17 @@ const assert = require('assert')
 const cp = require('child_process')
 const fs = require('fs')
 
+let nodeCmd = 'node'
+if (process.platform === 'win32') {
+  nodeCmd = require('which').sync('node')
+}
+
 // todo: more test cases
 
 describe('jayin', () => {
   it ('x', (done) => {
     const helper = new BufferHelper()
-    const js = cp.spawn('node', ['./index.js', 'x.slice(2, 4)'])
+    const js = cp.spawn(nodeCmd, ['./index.js', 'x.slice(2, 4)'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '[3,4]')
       done()
@@ -23,7 +28,7 @@ describe('jayin', () => {
 
   it('-t', (done) => {
     const helper = new BufferHelper()
-    const js = cp.spawn('node', ['./index.js', '-t', 'x.slice(1, -1).replace(/,/g, `\n`)'])
+    const js = cp.spawn(nodeCmd, ['./index.js', '-t', 'x.slice(1, -1).replace(/,/g, `\n`)'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '1\n2\n3\n4\n5')
       done()
@@ -36,7 +41,7 @@ describe('jayin', () => {
 
   it('-ti', (done) => {
     const helper = new BufferHelper()
-    const js = cp.spawn('node', ['./index.js', '-ti', 'a=JSON.parse(x), a.push(999), a'])
+    const js = cp.spawn(nodeCmd, ['./index.js', '-ti', 'a=JSON.parse(x), a.push(999), a'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '[1,2,3,4,5,999]')
       done()
@@ -49,7 +54,7 @@ describe('jayin', () => {
 
   it('-to', (done) => {
     const helper = new BufferHelper()
-    const js = cp.spawn('node', ['./index.js', '-to', 'x.join(`\n`)'])
+    const js = cp.spawn(nodeCmd, ['./index.js', '-to', 'x.join(`\n`)'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '1\n2\n3\n4\n5')
       done()
@@ -62,7 +67,7 @@ describe('jayin', () => {
 
   it('exprs', (done) => {
     const helper = new BufferHelper()
-    const js = cp.spawn('node', ['./index.js', 'x.filter(x => x % 2)', 'x.reverse()'])
+    const js = cp.spawn(nodeCmd, ['./index.js', 'x.filter(x => x % 2)', 'x.reverse()'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '[3,1]')
       done()
@@ -75,7 +80,7 @@ describe('jayin', () => {
 
   it('no expr', (done) => {
     const helper = new BufferHelper()
-    const js = cp.spawn('node', ['./index.js'])
+    const js = cp.spawn(nodeCmd, ['./index.js'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '[1,2,3,4]')
       done()
@@ -88,7 +93,7 @@ describe('jayin', () => {
 
   it('_, _.filter, _.reverse', (done) => {
     const helper = new BufferHelper()
-    const js = cp.spawn('node', ['./index.js', '_(x).filter(x => x % 2).reverse().value()'])
+    const js = cp.spawn(nodeCmd, ['./index.js', '_(x).filter(x => x % 2).reverse().value()'])
     js.stdout.once('end', () => {
       assert.equal(helper.toString(), '[3,1]')
       done()
@@ -104,7 +109,7 @@ describe('jayin', () => {
     // const env = { count: 0 }
     // execSync('count=0')
     const helper = new BufferHelper()
-    const js = cp.spawn('node', ['./index.js', '-e', '-c', 'echo "${i}: ${x}" >> tmp'])
+    const js = cp.spawn(nodeCmd, ['./index.js', '-e', '-c', 'echo "${i}: ${x}" >> tmp'])
     js.stdout.once('end', () => {
       // assert.equal(execSync('echo $count').toString(), '15')
       // assert.equal(env.count, '15')
