@@ -13,8 +13,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # currently devDependencies require node>=6
-          # - 6 # skip
+          # currently devDependencies require node>=6 (>=8 with Windows)
           # - 8 # skip
           # - 10 # skip
           # - 12 # skip
