@@ -1,0 +1,64 @@
+name: e2e test
+
+on:
+  push:
+    branches: [master, dev, ci/**]
+  pull_request:
+    branches: [master, dev, ci/**]
+  workflow_dispatch:
+    # Keep this to allow for triggering manually
+
+jobs:
+  e2e-test:
+    strategy:
+      matrix:
+        # at the time `jayin` was created (May 15, 2016):
+        # node versions: 0.10.x, 0.12.x, 4
+        # https://github.com/nodejs/node/blob/main/CHANGELOG.md
+        # os versions: windows-2016, ubuntu-14.04
+        # https://en.wikipedia.org/wiki/Ubuntu_version_history
+        node-version:
+          # trying to pick up the lowest versions within the supported options
+          # https://github.com/actions/node-versions/blob/main/versions-manifest.json
+          - 6
+          # - 8 # skip
+          # - 10 # skip
+          # - 12 # skip
+          # - 14 # skip
+          # - 16 # skip
+          # - 18 # skip
+        os:
+          # trying to pick up the lowest versions within the supported options
+          # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#choosing-github-hosted-runners
+          # - windows-2019
+          - ubuntu-20.04
+          - macos-11
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install
+        run: |
+          npm install --production
+          npm link
+      - name: Test default
+        run: |
+          echo "[1,2,3,4,5]" | jayin "x.slice(1,4)" > tmp
+          node -e "assert.equal(fs.readFileSync('tmp','utf8'), '[2,3,4]')"
+      - name: Test -t
+        run: |
+          echo "[1,2,3,4,5]" | jayin -t "JSON.stringify(JSON.parse(x.trim()).slice(1,4))" > tmp
+          node -e "assert.equal(fs.readFileSync('tmp','utf8'), '[2,3,4]')"
+      - name: Test -ti
+        run: |
+          echo "[1,2,3,4,5]" | jayin -ti "JSON.parse(x.trim()).slice(1,4)" > tmp
+          node -e "assert.equal(fs.readFileSync('tmp','utf8'), '[2,3,4]')"
+      - name: Test -to
+        run: |
+          echo "[1,2,3,4,5]" | jayin -to "JSON.stringify(x.slice(1,4))" > tmp
+          node -e "assert.equal(fs.readFileSync('tmp','utf8'), '[2,3,4]')"

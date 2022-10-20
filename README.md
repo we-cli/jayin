@@ -1,6 +1,6 @@
 # jayin
 
-<a href="https://github.com/fritx/jayin"><img width="90" height="20" src="https://fritx.github.io/51voa-cli/img/prs-welcome.svg"></a>&nbsp;&nbsp;<a href="https://circleci.com/gh/fritx/jayin/tree/dev"><img width="73" height="20" src="https://circleci.com/gh/fritx/jayin/tree/dev.svg?style=svg"></a>
+<a href="https://github.com/fritx/jayin"><img width="90" height="20" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>&nbsp;&nbsp;[![unit](https://github.com/fritx/jayin/actions/workflows/unit-test.yml/badge.svg)](https://github.com/fritx/jayin/actions/workflows/unit-test.yml)&nbsp;&nbsp;[![e2e](https://github.com/fritx/jayin/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/fritx/jayin/actions/workflows/e2e-test.yml)
 
 Let's say you have a gitignore-like file:
 
@@ -84,6 +84,18 @@ alias js="jayin"
 jayin is based on [through2](https://github.com/rvagg/through2).
 
 If you've seen anything that is similar to this, don't hesitate to let me know ;)
+
+## Compatibility
+
+| os  | Windows | Ubuntu | MacOS |
+|:---:|:---:|:---:|:---:|
+| supported | ✅ | ✅ | ✅ |
+
+| node    | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| supported    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+See also: [.github/workflows/](https://github.com/fritx/jayin/blob/dev/.github/workflows/)
 
 ## License
 
