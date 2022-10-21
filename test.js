@@ -5,10 +5,12 @@ const assert = require('assert')
 const cp = require('child_process')
 const fs = require('fs')
 
+console.log('process.platform', process.platform)
 let nodeCmd = 'node'
 if (process.platform === 'win32') {
   nodeCmd = require('which').sync('node')
 }
+console.log('nodeCmd', nodeCmd)
 
 // todo: more test cases
 
@@ -109,12 +111,12 @@ describe('jayin', () => {
     // const env = { count: 0 }
     // execSync('count=0')
     const helper = new BufferHelper()
-    const js = cp.spawn(nodeCmd, ['./index.js', '-e', '-c', 'echo "${i}: ${x}" >> tmp'])
+    const js = cp.spawn(nodeCmd, ['./index.js', '-e', '-c', "(echo ${i}: ${x}) >> tmp"])
     js.stdout.once('end', () => {
       // assert.equal(execSync('echo $count').toString(), '15')
       // assert.equal(env.count, '15')
       assert.equal(helper.toString(), '["a","b","c"]') // in chain
-      assert.equal(cp.execSync('cat tmp').toString(), '0: a\n1: b\n2: c\n')
+      assert.equal(cp.execSync('cat tmp').toString().replace(/\r\n/g, '\n'), '0: a\n1: b\n2: c\n')
       done()
     })
     js.stdout.on('data', (chunk) => {

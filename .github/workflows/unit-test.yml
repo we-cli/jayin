@@ -13,16 +13,16 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # currently devDependencies require node>=6 (>=8 with Windows)
-          # - 8 # skip
+          # currently devDependencies require node>=8.9
+          - 8
           # - 10 # skip
           # - 12 # skip
           # - 14 # skip
           # - 16 # skip
-          - 18
+          # - 18 # skip
         os:
+          - windows-latest
           - ubuntu-latest
-          # - windows-latest
           - macos-latest
 
     runs-on: ${{ matrix.os }}
