@@ -37,3 +37,7 @@ jobs:
         run: npm install
       - name: Test
         run: npm test
+
+      - name: Update Coverage Badge
+        if: ${{ matrix.os == 'ubuntu-latest' && matrix.node-version == 8 }}
+        uses: we-cli/coverage-badge-action@main

@@ -18,7 +18,7 @@
     "jayin": "index.js"
   },
   "scripts": {
-    "test": "nyc mocha --timeout 5000"
+    "test": "nyc -r text -r json-summary mocha --timeout 5000"
   },
   "devDependencies": {
     "bufferhelper": "^0.2.1",

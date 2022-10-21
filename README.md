@@ -1,6 +1,7 @@
 # jayin
 
-<a href="https://github.com/fritx/jayin"><img width="90" height="20" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>&nbsp;&nbsp;[![unit](https://github.com/fritx/jayin/actions/workflows/unit-test.yml/badge.svg)](https://github.com/fritx/jayin/actions/workflows/unit-test.yml)&nbsp;&nbsp;[![e2e](https://github.com/fritx/jayin/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/fritx/jayin/actions/workflows/e2e-test.yml)
+<a href="https://github.com/fritx/jayin"><img width="90" height="20" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>&nbsp;&nbsp;[![cov](https://we-cli.github.io/jayin/badges/coverage.svg)](https://github.com/fritx/jayin/actions/workflows/unit-test.yml)
+&nbsp;&nbsp;[![unit](https://github.com/fritx/jayin/actions/workflows/unit-test.yml/badge.svg)](https://github.com/fritx/jayin/actions/workflows/unit-test.yml)&nbsp;&nbsp;[![e2e](https://github.com/fritx/jayin/actions/workflows/e2e-test.yml/badge.svg)](https://github.com/fritx/jayin/actions/workflows/e2e-test.yml)
 
 Let's say you have a gitignore-like file:
 
