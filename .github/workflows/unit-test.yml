@@ -15,7 +15,7 @@ jobs:
         node-version:
           # currently devDependencies require node>=8.9
           - 8
-          # - 10 # skip
+          - 10
           # - 12 # skip
           # - 14 # skip
           # - 16 # skip
@@ -35,6 +35,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install
         run: npm install
+      - name: Fix nyc coverage report with node8
+        run: >
+          npm install --no-save
+          istanbul-lib-coverage@3.2.0
+          istanbul-lib-instrument@5.2.1
+          istanbul-lib-report@3.0.0
+          istanbul-reports@3.1.5
       - name: Test
         run: npm test
 
