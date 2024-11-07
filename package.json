@@ -1,6 +1,6 @@
 {
   "name": "jayin",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Piping with js at terminal",
   "repository": "fritx/jayin",
   "license": "MIT",
@@ -13,6 +13,9 @@
     "pipe",
     "shell",
     "stream"
+  ],
+  "files": [
+    "index.js"
   ],
   "bin": {
     "jayin": "index.js"
