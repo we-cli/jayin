@@ -35,7 +35,7 @@ cat file | sed /^\*$/d | sed s/\!// \
 sed /^\*$/d .gitignore | sed s/\!// | xargs -I{} cp {} ./dotfiles/
 ```
 
-<a href="https://github.com/fritx/jayin"><img width="213" height="211" src="wtf.jpg"></a>
+<a href="https://github.com/fritx/jayin"><img width="213" height="211" src="https://raw.gitmirror.com/we-cli/jayin/dev/wtf.jpg"></a>
 
 WTF?
 
