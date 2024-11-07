@@ -14,7 +14,7 @@ jobs:
       matrix:
         node-version:
           # currently devDependencies require node>=8.9
-          - 8
+          # - 8 # deprecated by actions
           - 10
           # - 12 # skip
           # - 14 # skip
